@@ -1,13 +1,60 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+public class Main {
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
-  }
+    public static void main(String[] args) {
+        Selecao selecao = new Quadrados();
+        Bombas bombas = new Bombas();
+        Carteira carteira = new Carteira();
+
+        boolean rodando = true;
+
+        while (rodando) {
+            switch (selecao.Menu()) {
+                case 1:
+                    jogarPartida(selecao, bombas, carteira);
+                    break;
+                case 2:
+                    apostar(selecao, bombas, carteira);
+                    break;
+                case 3:
+                    System.out.println("Saldo na carteira: " + carteira.getSaldo());
+                    break;
+                case 4:
+                    rodando = false;
+                    break;
+            }
+        }
+
+        System.out.println("Saldo final: " + carteira.getSaldo() + ". Obrigado por jogar!");
+    }
+
+    private static void jogarPartida(Selecao selecao, Bombas bombas, Carteira carteira) {
+        bombas.reiniciar();
+
+        while (!bombas.isFimDeJogo()) {
+            String cor = selecao.Escolha();
+            bombas.escolher(cor);
+            System.out.println("Pontos da partida: " + bombas.getPontos());
+        }
+
+        carteira.depositar(bombas.getPontos());
+        System.out.println("Você guardou " + bombas.getPontos() + " pontos na carteira.");
+        System.out.println("Saldo na carteira: " + carteira.getSaldo());
+    }
+
+    private static void apostar(Selecao selecao, Bombas bombas, Carteira carteira) {
+        if (carteira.getSaldo() == 0) {
+            System.out.println("Você não tem pontos para apostar. Jogue uma partida primeiro.");
+            return;
+        }
+
+        int valor = selecao.EscolherAposta(carteira.getSaldo());
+        if (valor == 0) {
+            System.out.println("Aposta cancelada.");
+            return;
+        }
+
+        String cor = selecao.Escolha();
+        bombas.apostar(cor, valor, carteira);
+        System.out.println("Saldo na carteira: " + carteira.getSaldo());
+    }
 }
