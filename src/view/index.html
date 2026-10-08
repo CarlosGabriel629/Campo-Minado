@@ -9,11 +9,23 @@
 <body>
 <main>
     <h1>Campo minado</h1>
-    <p class="sub">Jogue partidas para acumular pontos na carteira e depois aposte esses pontos.</p>
+    <p class="sub">Acumule pontos, faça sequências de acertos para ganhar bônus 2x e suba no ranking.</p>
+
+    <div class="jogador">
+        <label for="nome">Seu nome</label>
+        <div class="linha">
+            <input id="nome" type="text" maxlength="16" placeholder="Digite seu nome">
+            <button type="button" id="entrar">Entrar</button>
+        </div>
+    </div>
 
     <div class="placar">
         <div><span>Carteira</span><strong id="carteira">0</strong></div>
         <div><span>Pontos da partida</span><strong id="pontos">0</strong></div>
+        <div><span>Sequência de acertos</span><strong id="sequencia">0</strong></div>
+        <div><span>Tentativas hoje</span><strong id="tentativas">-</strong></div>
+        <div><span>Ganho em apostas</span><strong id="ganhoApostas">0</strong></div>
+        <div><span>Perdido em apostas</span><strong id="perdidoApostas">0</strong></div>
     </div>
 
     <div class="modos">
@@ -22,7 +34,7 @@
     </div>
 
     <div class="aposta" id="aposta" hidden>
-        <label for="valor">Valor da aposta</label>
+        <label for="valor">Valor da aposta (não gasta tentativas)</label>
         <div class="linha">
             <input id="valor" type="number" min="1" inputmode="numeric" placeholder="0">
             <button type="button" id="metade">Metade</button>
@@ -36,8 +48,13 @@
         <button class="bomba vermelha" data-cor="Vermelha">Vermelha</button>
     </div>
 
-    <div class="msg" id="msg" role="status" aria-live="polite">Escolha uma bomba para começar.</div>
+    <div class="msg" id="msg" role="status" aria-live="polite">Digite seu nome e clique em Entrar para começar.</div>
     <button class="novo" id="novo">Jogar de novo</button>
+
+    <section class="ranking">
+        <h2>Ranking (melhor partida)</h2>
+        <ol id="ranking"></ol>
+    </section>
 </main>
 <script src="script.js"></script>
 </body>
