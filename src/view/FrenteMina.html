@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Campo minado</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+    <h1>Campo minado</h1>
+    <p class="sub">Jogue partidas para acumular pontos na carteira e depois aposte esses pontos.</p>
+
+    <div class="placar">
+        <div><span>Carteira</span><strong id="carteira">0</strong></div>
+        <div><span>Pontos da partida</span><strong id="pontos">0</strong></div>
+    </div>
+
+    <div class="modos">
+        <button class="modo ativo" data-modo="partida">Jogar partida</button>
+        <button class="modo" data-modo="aposta">Apostar</button>
+    </div>
+
+    <div class="aposta" id="aposta" hidden>
+        <label for="valor">Valor da aposta</label>
+        <div class="linha">
+            <input id="valor" type="number" min="1" inputmode="numeric" placeholder="0">
+            <button type="button" id="metade">Metade</button>
+            <button type="button" id="tudo">Tudo</button>
+        </div>
+    </div>
+
+    <div class="bombas">
+        <button class="bomba azul" data-cor="Azul">Azul</button>
+        <button class="bomba verde" data-cor="Verde">Verde</button>
+        <button class="bomba vermelha" data-cor="Vermelha">Vermelha</button>
+    </div>
+
+    <div class="msg" id="msg" role="status" aria-live="polite">Escolha uma bomba para começar.</div>
+    <button class="novo" id="novo">Jogar de novo</button>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
